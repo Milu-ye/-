@@ -1,0 +1,24 @@
+{
+  "data": {
+    
+    "Qianguserid": 76040885,
+    "Yeuserid": 8592273144,
+    "code": 200,
+    "account": {
+      "id": 9863120098,
+      "userName": "1000_CC000E7896FFD46FEB73C805BB8BE91363B17369692D9F99380A",
+      "type": 1000,
+      "status": -10,
+      "whitelistAuthority": 0,
+      "createTime": 1714450585633,
+      "tokenVersion": 0,
+      "ban": 0,
+      "baoyueVersion": 0,
+      "donateVersion": 0,
+      "vipType": 0,
+      "anonimousUser": true,
+      "paidFee": false
+    },
+    "profile": null
+  }
+}
