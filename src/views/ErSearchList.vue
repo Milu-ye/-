@@ -3,10 +3,16 @@
         <header>
 
             <router-link :to="{
-                name: 'searchmusic'
+                name: 'searchmusic',
+                query: {
+                    keywords: route.query.keywords
+                }
             }"><span>单曲</span></router-link>
             <router-link @click="jumpToSearchPlaylist" :to="{
                 name: 'searchplaylist',
+                query: {
+                    keywords: route.query.keywords
+                }
 
             }"><span>歌单</span></router-link><router-link :to="{
                 name: 'searchsinger'
@@ -22,21 +28,25 @@
 
 <script setup>
 import { getSearchPlaylist } from '@/api/cloude';
+import { useRoute } from 'vue-router';
 import ErMusicList from './ErMusicList.vue';
 import { useStore } from 'vuex';
 import emitter from '@/utils/emitter';
+import { onMounted } from 'vue';
 const store = useStore()
+const route = useRoute()
 //获取header组件的关键字
-let keywords;
-emitter.on('postKeyWords', (val) => {
-    keywords = val;
-})
+let keywords = route.query.keywords;
+
 //跳转到歌单模块
 const jumpToSearchPlaylist = async () => {
     const { data: { result: { playlists } } } = await getSearchPlaylist(keywords)
     console.log(playlists)
     store.commit('GETSONGPLAYLIST', playlists)
 }
+onMounted(() => {
+    console.log(keywords)
+})
 </script>
 
 <style lang="less" scoped>

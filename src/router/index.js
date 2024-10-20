@@ -74,6 +74,11 @@ const router = createRouter({
               name: 'historyalbum'
             }
           ]
+        },
+        {
+          path: 'detailplaylist',
+          name: 'detailplaylist',
+          component: MusicList
         }
       ]
     },

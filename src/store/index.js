@@ -59,11 +59,11 @@ export default createStore({
     UPDATECURRENTMUSICURL(state, url) {
       state.currentMusicUrl = url
     },
-    //得到音乐列表
+    //渲染音乐列表
     GETMUSICLIST(state, val) {
       state.musicList = val
     },
-    //得到歌单列表
+    //渲染歌单列表
     GETSONGPLAYLIST(state, val) {
       state.songPlayList = val
     },

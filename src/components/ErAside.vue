@@ -1,5 +1,18 @@
 <template>
     <section class="aside-container">
+        <div class="aside-head">
+            <h5>
+                云音乐
+            </h5>
+            <div class="navigate">
+                <el-icon @click="router.go(-1)">
+                    <i-ep-ArrowLeftBold />
+                </el-icon>
+                <el-icon @click="router.go(1)">
+                    <i-ep-ArrowRightBold />
+                </el-icon>
+            </div>
+        </div>
         <div class="list function">12</div>
         <div class="list user">12</div>
         <div class="list myList">
@@ -108,7 +121,7 @@ onMounted(() => {
 .aside-container {
     display: flex;
     flex-direction: column;
-
+    align-items: center;
     color: white;
     height: 100%;
     width: 80%;
@@ -146,6 +159,35 @@ onMounted(() => {
 
 
 }
+
+.aside-head {
+    width: 100%;
+    display: flex;
+    height: 8%;
+    justify-content: space-between;
+
+    h5 {
+        color: white;
+        transform: translateY(5%);
+        font-size: 16px;
+    }
+
+    .navigate {
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+
+        .el-icon {
+            width: 1.2vw;
+            height: 1.2vw;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: #3e3f42;
+        }
+    }
+}
+
 
 .smallTitle {
     color: #909399;

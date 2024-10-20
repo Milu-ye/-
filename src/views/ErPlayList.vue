@@ -1,9 +1,9 @@
 <template>
     <section v-loading="store.state.loading" ref="tableContainer">
-        <el-table v-scroll :scrollbar-always-on="true" :data="songPlayList.slice(0, over)" :height="tableHeight"
-            :style="tableStyle.elTableStyle" max-height="610" :fit="false" :row-style="tableStyle.rowStyle"
-            :cell-style="tableStyle.cellStyle" :header-cell-style="tableStyle.headerCellStyle"
-            :header-row-style="tableStyle.headerRowStyle">
+        <el-table @row-dblclick="jumpToMusicList" v-scroll :scrollbar-always-on="true"
+            :data="songPlayList.slice(0, over)" :height="tableHeight" :style="tableStyle.elTableStyle" max-height="610"
+            :fit="false" :row-style="tableStyle.rowStyle" :cell-style="tableStyle.cellStyle"
+            :header-cell-style="tableStyle.headerCellStyle" :header-row-style="tableStyle.headerRowStyle">
             <el-table-column label="#" :width="tableWidth[0]">
                 <template #default="{ $index }">
                     <div style="font-size: 12px;font-weight: 600;">
@@ -21,7 +21,7 @@
                     </div>
                 </template>
             </el-table-column>
-            <el-table-column :width="tableWidth[2]" :label="songPlayList[$index]?.trackCount ? '歌曲数' : ''">
+            <el-table-column :width="tableWidth[2]" :label="songPlayList[0]?.trackCount ? '歌曲数' : ''">
                 <template #default="{ $index }">
                     <div class="small">
                         <p>{{ songPlayList[$index]?.trackCount }}</p>
@@ -35,10 +35,11 @@
                     </div>
                 </template>
             </el-table-column>
-            <el-table-column :width="tableWidth[4]" :label="songPlayList[$index]?.playCount ? '播放量' : ''">
+            <el-table-column :width="tableWidth[4]" :label="songPlayList[0]?.playCount ? '播放量' : ''">
                 <template #default="{ $index }">
                     <div class="small">
-                        <p>{{ songPlayList[$index]?.playCount ? transformPlayCount(songPlayList[$index]?.playCount) : '' }}
+                        <p>{{ songPlayList[$index]?.playCount ? transformPlayCount(songPlayList[$index]?.playCount) : ''
+                            }}
                         </p>
                     </div>
                 </template>
@@ -50,13 +51,23 @@
 <script setup>
 import { ref, reactive, onMounted, compile, computed } from 'vue'
 import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import * as tableStyle from '@/utils/el-table_style'
+import { getSongsInPlaylist } from '../api/cloude'
 const route = useRoute()
+const router = useRouter()
 const store = useStore();
 const songPlayList = computed(() => {
     return store.state.songPlayList
 })
+//跳转到音乐列表
+const jumpToMusicList = async (row) => {
+    router.push({
+        name: 'detailplaylist'
+    })
+    const { data: { songs } } = await getSongsInPlaylist(row.id);
+    store.commit('GETMUSICLIST', songs);
+}
 //table表格自适应高度
 const tableContainer = ref(null)
 const tableHeight = ref(0)

@@ -63,10 +63,15 @@ const getSeachInfo = async () => {
             limit: 100
         }
     })
-    //存放搜索结果到vuex中并跳转路由
     emitter.emit('postKeyWords', keywords)
     store.commit('GETMUSICLIST', result.songs);
-    router.push({ name: 'searchmusic' })
+    //存放搜索结果到vuex中并跳转路由
+    router.push({
+        name: 'searchmusic',
+        query: {
+            keywords
+        }
+    })
 
 }
 </script>

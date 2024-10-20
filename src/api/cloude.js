@@ -44,3 +44,14 @@ export const getHistoryPlaylist = () => {
     }
   })
 }
+
+//获得歌单内的歌曲
+export const getSongsInPlaylist = (id) => {
+  return cloudeRequest({
+    url: '/playlist/track/all',
+    method: 'get',
+    params: {
+      id
+    }
+  })
+}
