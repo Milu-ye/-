@@ -3,7 +3,8 @@ const globalConfig = {
     '/cloudsearch',
     '/record/recent/playlist',
     '/record/recent/song',
-    '/playlist/track/all'
+    '/playlist/track/all',
+    '/user/playlist'
   ]
 }
 export default globalConfig

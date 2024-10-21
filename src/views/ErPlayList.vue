@@ -1,6 +1,6 @@
 <template>
     <section v-loading="store.state.loading" ref="tableContainer">
-        <el-table @row-dblclick="jumpToMusicList" v-scroll :scrollbar-always-on="true"
+        <el-table v-if="!store.state.loading" @row-dblclick="jumpToMusicList" v-scroll :scrollbar-always-on="true"
             :data="songPlayList.slice(0, over)" :height="tableHeight" :style="tableStyle.elTableStyle" max-height="610"
             :fit="false" :row-style="tableStyle.rowStyle" :cell-style="tableStyle.cellStyle"
             :header-cell-style="tableStyle.headerCellStyle" :header-row-style="tableStyle.headerRowStyle">

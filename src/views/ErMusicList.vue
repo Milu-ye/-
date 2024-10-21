@@ -1,9 +1,9 @@
 <template>
     <section v-loading="store.state.loading" ref="tableContainer">
-        <el-table v-scroll @row-dblclick="playMusic" :data="store.state.musicList.slice(0, over)" :height="tableHeight"
-            :style="tableStyle.elTableStyle" max-height="610" :fit="false" :row-style="tableStyle.rowStyle"
-            :cell-style="tableStyle.cellStyle" :header-cell-style="tableStyle.headerCellStyle"
-            :header-row-style="tableStyle.headerRowStyle">
+        <el-table v-if="!store.state.loading" v-scroll @row-dblclick="playMusic"
+            :data="store.state.musicList.slice(0, over)" :height="tableHeight" :style="tableStyle.elTableStyle"
+            max-height="610" :fit="false" :row-style="tableStyle.rowStyle" :cell-style="tableStyle.cellStyle"
+            :header-cell-style="tableStyle.headerCellStyle" :header-row-style="tableStyle.headerRowStyle">
             <el-table-column label="#" :width="tableWidth[0]">
                 <template #default="{ $index }">
                     <div id="row_header">
@@ -172,7 +172,7 @@ onMounted(() => {
 //     window.removeEventListener('resize', updateTableSize())
 // })
 </script>
-<style>
+<style lang='less'>
 :deep(.el-table__inner-wrapper::before) {
     height: 0;
 }
@@ -233,7 +233,7 @@ section {
     }
 }
 
-:deep(.el-table__row) {
+.el-table__row {
 
     &:hover {
 
@@ -249,6 +249,7 @@ section {
         }
     }
 }
+
 
 .small {
     font-size: 13px;

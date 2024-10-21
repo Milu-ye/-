@@ -6,6 +6,8 @@ import MusicList from '../views/ErMusicList.vue'
 import SearchList from '@/views/ErSearchList.vue'
 import HistoryList from '@/views/ErHistoryList.vue'
 import PlayList from '@/views/ErPlayList.vue'
+import Myplaylist from '@/views/MyPlaylist.vue'
+import ErPlayList from '@/views/ErPlayList.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -79,6 +81,23 @@ const router = createRouter({
           path: 'detailplaylist',
           name: 'detailplaylist',
           component: MusicList
+        },
+        {
+          path: 'myplaylist',
+          name: 'myplaylist',
+          component: Myplaylist
+          // children: [
+          //   {
+          //     path: 'create',
+          //     name: 'create',
+          //     component: ErPlayList
+          //   },
+          //   {
+          //     path: 'collect',
+          //     name: 'create',
+          //     component: ErPlayList
+          //   }
+          // ]
         }
       ]
     },

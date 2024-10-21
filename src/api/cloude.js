@@ -55,3 +55,14 @@ export const getSongsInPlaylist = (id) => {
     }
   })
 }
+
+//获取用户歌单
+export const getUserPlaylist = (uid) => {
+  return cloudeRequest({
+    url: '/user/playlist',
+    method: 'get',
+    params: {
+      uid
+    }
+  })
+}

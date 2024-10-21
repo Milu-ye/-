@@ -35,17 +35,15 @@ import emitter from '@/utils/emitter';
 import { onMounted } from 'vue';
 const store = useStore()
 const route = useRoute()
+
 //获取header组件的关键字
 let keywords = route.query.keywords;
-
 //跳转到歌单模块
 const jumpToSearchPlaylist = async () => {
     const { data: { result: { playlists } } } = await getSearchPlaylist(keywords)
-    console.log(playlists)
     store.commit('GETSONGPLAYLIST', playlists)
 }
 onMounted(() => {
-    console.log(keywords)
 })
 </script>
 

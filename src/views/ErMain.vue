@@ -12,11 +12,10 @@
                 </el-row>
                 <el-row style="height: 90%;">
                     <el-col :span="24">
-                        <div class="mainContaint" v-loading="store.state.loading">
-                            <router-view v-if="!store.state.loading" v-slot="{ Component }">
-                                <keep-alive>
-                                    <component :is="Component"></component>
-                                </keep-alive>
+                        <div class="mainContaint">
+                            <router-view v-slot="{ Component }">
+
+                                <component :is="Component"></component>
                             </router-view>
                         </div>
                     </el-col>

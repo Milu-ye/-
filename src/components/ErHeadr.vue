@@ -57,21 +57,20 @@ onMounted(() => {
 //获取搜索结果
 const getSeachInfo = async () => {
     let keywords = searchContent.value || hot.value
-    let { data: { result } } = await cloudeRequest.get('/cloudsearch', {
-        params: {
-            keywords,
-            limit: 100
-        }
-    })
-    emitter.emit('postKeyWords', keywords)
-    store.commit('GETMUSICLIST', result.songs);
-    //存放搜索结果到vuex中并跳转路由
     router.push({
         name: 'searchmusic',
         query: {
             keywords
         }
     })
+    let { data: { result } } = await cloudeRequest.get('/cloudsearch', {
+        params: {
+            keywords,
+            limit: 100
+        }
+    })
+    store.commit('GETMUSICLIST', result.songs);
+    //存放搜索结果到vuex中并跳转路由
 
 }
 </script>

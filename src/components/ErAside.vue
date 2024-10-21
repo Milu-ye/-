@@ -33,8 +33,26 @@
                 </svg>
                 <span>最近播放</span>
             </div>
+            <div class="content" @click="jumpToMyPlaylist">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" fill="currentColor"
+                    class="bi bi-collection-play-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm6.258-6.437a.5.5 0 0 1 .507.013l4 2.5a.5.5 0 0 1 0 .848l-4 2.5A.5.5 0 0 1 6 12V7a.5.5 0 0 1 .258-.437z" />
+                </svg>
+                <span>
+                    我的歌单
+                </span>
+            </div>
         </div>
-        <div class="list collectList">12</div>
+        <div class="list collectList">
+            <p class="smallTitle">歌单</p>
+            <div @click="jumpToMylove" class="content">
+                我创建的歌单
+            </div>
+            <div @click="jumpToMylove" class="content">
+                我收藏的歌单
+            </div>
+        </div>
     </section>
 </template>
 
@@ -51,9 +69,6 @@ const store = useStore()
 //#region
 //喜欢音乐功能模块
 let LikeMusicList = reactive([]);
-emitter.on('loadlikeMusicList', (over) => {
-
-})
 let isFirst;
 const requestList = reactive([])
 //喜欢音乐请求列表
@@ -76,11 +91,11 @@ const upLoadLikeList = (newOver) => {
     oldOver.value = newOver;
     axios.all(requestList).then(res => {
         if (isFirst) {
-            store.commit('CHANGELOADING')
-            isFirst = false
             router.push({
                 name: 'likelist'
             })
+            store.commit('CHANGELOADING')
+            isFirst = false
         }
         res = res.map(item => item.data?.songs?.[0])
         // LikeMusicList = Object.assign(LikeMusicList, res)
@@ -95,6 +110,12 @@ const jumpToMylove = () => {
     upLoadLikeList();
 }
 //#endregion
+//跳转到我的歌单
+const jumpToMyPlaylist = () => {
+    router.push({
+        name: 'myplaylist'
+    })
+}
 //#region
 //最近播放模块
 //得到最近播放-歌曲列表插入musiclist
@@ -108,8 +129,8 @@ const formHistory = async () => {
     store.commit('GETMUSICLIST', musiclist)
 }
 const jumpToHistory = () => {
-    formHistory();
     router.push({ name: 'historymusic' });
+    formHistory();
 }
 //#endregion
 onMounted(() => {
@@ -177,6 +198,10 @@ onMounted(() => {
         display: flex;
         justify-content: space-between;
         height: 100%;
+
+        .el-icon:active {
+            transform: scale(0.96);
+        }
 
         .el-icon {
             width: 1.2vw;
